@@ -115,9 +115,16 @@ class LinkedList:
             removed.next = None
             self.length -= 1
             return removed
-
-
-
+        
+    def partition_list(self, value):
+        """
+        Given a value, all the node less than the value will in the first part,
+        and all the node greater than or equal to the value will in the second part.
+        and return should be one linked list
+        """
+        
+        pass
+        
 def print_ll(ll: LinkedList):
     print("============")
     temp = ll.head
@@ -132,16 +139,12 @@ def main():
     print_ll(ll)
 
     ll.append(10)
-    ll.prepend(1)
+    ll.append(1)
+    ll.append(0)
     print_ll(ll)
-
-    ll.pop_first()
-    print_ll(ll)
-
-    ll.pop()
-    print_ll(ll)
-
-    ll.pop()
+    
+    
+    ll.partition_list(3)
     print_ll(ll)
     return
 
