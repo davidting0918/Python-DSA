@@ -33,10 +33,10 @@ class LinkedList:
         else:
             pre = self.head
             temp = self.head
-            while pre.next:
-                temp = pre
-                pre = pre.next
-            self.tail = temp
+            while temp.next:
+                pre = temp
+                temp = temp.next
+            self.tail = pre
             self.tail.next = None
 
             self.length -= 1
@@ -49,7 +49,8 @@ class LinkedList:
     def prepend(self, value):
         new_node = Node(value)
         if self.length == 0:
-            self.append(value)
+            self.head = new_node
+            self.tail = new_node
         else:
             new_node.next = self.head
             self.head = new_node
@@ -87,7 +88,7 @@ class LinkedList:
         return False
 
     def insert(self, index, value):
-        if index < 0 or index >= self.length:
+        if index < 0 or index > self.length: # if the linked list length is 4 then index can't be 4
             return False
         elif index == 0:
             return self.prepend(value)
@@ -115,7 +116,7 @@ class LinkedList:
             removed.next = None
             self.length -= 1
             return removed
-        
+
     def partition_list(self, value):
         """
         Given a value, all the node less than the value will in the first part,
@@ -124,7 +125,74 @@ class LinkedList:
         """
         
         pass
-        
+
+    def reverse(self):
+        # switch head and tail
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+        # start reversing
+        before = None
+        for _ in range(self.length):
+            after = temp.next
+            temp.next = before
+            before = temp
+            temp = after
+
+        return True
+
+    def find_middle_node(self):
+        slow = self.head
+        fast = self.head
+
+        while True:
+            fast = fast.next
+            if not fast:
+                break
+            fast = fast.next
+            if not fast:
+                slow = slow.next
+                break
+            slow = slow.next
+        return slow
+
+    def has_loop(self):
+        """
+        Main idea: if the fast one will reach a None, then the linked list doesn't have a loop
+
+        """
+        slow = self.head
+        fast = self.head
+
+        while True:
+            fast = fast.next
+            if not fast:
+                return False
+            fast = fast.next
+            if not fast:
+                return False
+            slow = slow.next
+            if slow == fast:
+                return True
+
+
+def find_kth_from_end(ll: LinkedList, k):
+    slow = ll.head
+    fast = ll.head
+
+    # first let the fast one move k nodes ahead
+    for _ in range(k):
+        if not fast:
+            return None
+        fast = fast.next
+
+    while fast:
+        slow = slow.next
+        fast = fast.next
+
+    return slow
+
 def print_ll(ll: LinkedList):
     print("============")
     temp = ll.head
@@ -133,21 +201,3 @@ def print_ll(ll: LinkedList):
         temp = temp.next
     print("============\n")
 
-
-def main():
-    ll = LinkedList(5)
-    print_ll(ll)
-
-    ll.append(10)
-    ll.append(1)
-    ll.append(0)
-    print_ll(ll)
-    
-    
-    ll.partition_list(3)
-    print_ll(ll)
-    return
-
-
-if __name__ == '__main__':
-    main()
