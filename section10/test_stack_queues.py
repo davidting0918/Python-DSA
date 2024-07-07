@@ -41,4 +41,5 @@ class TestStack(TestCase):
         n = self.s.pop()
         self.assertEqual(n.value, 1)
 
-class T
+class TestQueue(TestCase):
+    pass
