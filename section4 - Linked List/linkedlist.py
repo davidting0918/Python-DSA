@@ -123,8 +123,29 @@ class LinkedList:
         and all the node greater than or equal to the value will in the second part.
         and return should be one linked list
         """
+        node1 = Node(0)
+        node2 = Node(0)
         
-        pass
+        prev1 = node1
+        prev2 = node2
+        
+        temp = self.head
+        while temp:
+            if temp.value < value:
+                prev1.next = temp
+                prev1 = temp
+            else:
+                prev2.next = temp
+                prev2 = temp
+            temp = temp.next
+        
+        prev1.next = None
+        prev2.next = None
+        
+        prev1.next = node2.next
+        self.head = node1.next
+        
+        return True
 
     def reverse(self):
         # switch head and tail
@@ -175,6 +196,14 @@ class LinkedList:
             slow = slow.next
             if slow == fast:
                 return True
+    
+    def print(self):
+        print("============")
+        temp = self.head
+        while temp:
+            print(temp.value)
+            temp = temp.next
+        print("============\n")
 
 
 def find_kth_from_end(ll: LinkedList, k):
@@ -193,11 +222,5 @@ def find_kth_from_end(ll: LinkedList, k):
 
     return slow
 
-def print_ll(ll: LinkedList):
-    print("============")
-    temp = ll.head
-    while temp:
-        print(temp.value)
-        temp = temp.next
-    print("============\n")
+
 
