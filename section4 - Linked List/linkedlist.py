@@ -146,6 +146,28 @@ class LinkedList:
         self.head = node1.next
         
         return True
+    
+    def remove_duplicates(self):
+        """
+        This function will remove the duplicated node from the linked list
+        """
+        all_values = []
+        
+        current = self.head
+        prev = self.head
+        
+        while current:
+            if current.value in all_values:
+                prev.next = current.next
+                current.next = None
+                current = prev.next
+                self.length -= 1
+            else:
+                all_values.append(current.value)
+                prev = current
+                current = current.next
+                
+        return
 
     def reverse(self):
         # switch head and tail
