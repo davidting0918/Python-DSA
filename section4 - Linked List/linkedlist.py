@@ -196,6 +196,43 @@ class LinkedList:
             current = current.next
         return result
 
+    def reverse_between(self, start, end):
+        if start == end:
+            return
+        prev = None
+        current = self.head
+        index = 0
+
+        before_head = None
+        sub_head = None
+        after_tail = None
+        sub_tail = None
+        while index <= end:
+            after = current.next
+            if index == start:
+                before_head = prev
+                sub_head = current
+            elif index == end:
+                after_tail = after
+                sub_tail = current
+
+            if start < index <= end:
+                current.next = prev
+
+            prev = current
+            current = after
+
+            index += 1
+
+        if start == 0:
+            self.head = sub_tail
+        else:
+            before_head.next = sub_tail
+        sub_head.next = after_tail
+
+        return
+
+
 
     def find_middle_node(self):
         slow = self.head
