@@ -6,7 +6,7 @@ class TestLinkedList(TestCase):
     def setUp(self):
         self.ll = LinkedList(1)
         
-        values = [2, 3, 1, 4, 2, 5]
+        values = range(2, 6)
         
         for i in values:
             self.ll.append(i)
@@ -21,5 +21,11 @@ class TestLinkedList(TestCase):
     def test_remove_duplicated(self):
         self.ll.print()
         self.ll.remove_duplicates()
+        self.ll.print()
+        return
+
+    def test_reverse_between(self):
+        self.ll.print()
+        self.ll.reverse_between(1, 3)
         self.ll.print()
         return
