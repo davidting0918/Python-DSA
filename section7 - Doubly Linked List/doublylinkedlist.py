@@ -173,9 +173,32 @@ class DoublyLinkedList:
             temp.next = None
             temp.prev = None
             return temp
-            
-            
 
-        
+    def swap_first_last(self):
+        if not self.head:
+            return
 
-        
+        temp = self.head.value
+
+        self.head.value = self.tail.value
+        self.tail.value = temp
+        return
+
+    def reverse(self):
+        if self.length <= 1:
+            return
+
+        current = self.head
+
+        while current:
+            next = current.next
+            temp = current.prev
+            current.prev = current.next
+            current.next = temp
+
+            current = next
+
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+        return

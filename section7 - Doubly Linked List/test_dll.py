@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from .doublylinkedlist import DoublyLinkedList
+from doublylinkedlist import DoublyLinkedList
 
 class TestDoublyLinkedList(TestCase):
     def setUp(self):
@@ -61,6 +61,13 @@ class TestDoublyLinkedList(TestCase):
         self.assertEqual(self.ddll.unpack(), [3])
         self.assertTrue(self.ddll.check())
     
-    def test_misc(self):
-        pass
+    def test_reverse(self):
+        values = range(2, 10)
+
+        for i in values:
+            self.ddll.append(i)
+        self.ddll.print()
+        self.ddll.reverse()
+        self.ddll.print()
+        return
     
