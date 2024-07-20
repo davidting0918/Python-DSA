@@ -197,6 +197,9 @@ class LinkedList:
         return result
 
     def reverse_between(self, start, end):
+        """
+        My method:
+
         if start == end:
             return
         prev = None
@@ -231,6 +234,33 @@ class LinkedList:
         sub_head.next = after_tail
 
         return
+        """
+
+        if self.length <= 1:
+            return
+
+        # use dummy node method
+        dummy = Node(0)
+        dummy.next = self.head
+        prev = dummy
+
+        # move to the first node where to start reversing
+        for _ in range(start):
+            prev = prev.next
+
+        current = prev.next
+
+        # start reversing the nodes
+        for _ in range(end - start):
+            target = current.next
+            current.next = target.next
+            target.next = prev.next
+            prev.next = target
+
+        self.head = dummy.next
+
+        return
+
 
 
 

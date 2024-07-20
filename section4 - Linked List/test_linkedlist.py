@@ -16,6 +16,6 @@ class TestLinkedList(TestCase):
 
     def test_reverse_between(self):
         self.ll.print()
-        self.ll.reverse_between(3, 3)
+        self.ll.reverse_between(1, 3)
         self.ll.print()
         return
