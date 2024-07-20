@@ -14,7 +14,7 @@ def merge(l1: list, l2: list):
     return result
 
 
-def merge_sort(raw_list: list) -> list:  # Time complexity: O(nlogn), since merge is O(n) and we need to do divide and conquer
+def merge_sort(raw_list: list) -> list:  # Time complexity: O(n * logn), since merge is O(n) and we need to do divide and conquer
     if len(raw_list) == 1:
         return raw_list
     mid_index = int(len(raw_list) / 2)
