@@ -70,4 +70,12 @@ class TestDoublyLinkedList(TestCase):
         self.ddll.reverse()
         self.ddll.print()
         return
-    
+
+    def test_swap_pairs(self):
+        values = range(2, 5)
+        for i in values:
+            self.ddll.append(i)
+
+        self.ddll.print()
+        self.ddll.swap_pairs()
+        return
