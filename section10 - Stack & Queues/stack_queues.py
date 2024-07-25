@@ -95,5 +95,76 @@ class Queues:  # FIFO, first in first out
             if self.length == 0:
                 self.last = None
             return temp
-            
-    
+
+
+# exercise question code
+# exercise 40 ~ 45
+class Stack2:
+    def __init__(self):
+        self.stack_list = []
+
+    def push(self, value):
+        self.stack_list.append(value)
+
+    def pop(self):
+        if not self.stack_list:
+            return None
+        else:
+            return self.stack_list.pop()
+    def size(self):
+        return len(self.stack_list)
+
+    def is_empty(self):
+        return True if self.size() == 0 else False
+
+    def peek(self):
+        if self.size() > 0:
+            return self.stack_list[-1]
+        return None
+def is_balanced_parentheses(raw_s: str) -> bool:
+    s = Stack2()
+    for i in raw_s:
+        if i == "(":
+            s.push("(")
+        elif i == ")":
+            if s.size() == 0:
+                return False
+            s.pop()
+    if s.size() > 0:
+        return False
+
+    return True
+
+
+def reverse_string(raw_s: str) -> str:
+    s = Stack2()
+
+    for i in raw_s:
+        s.push(i)
+
+    result = ""
+    while True:
+        if s.size() == 0:
+            break
+        result += s.pop()
+    return result
+
+def sort_stack(stack: Stack2):
+    sorted_s = Stack2()
+
+    while not stack.is_empty():
+        temp = stack.pop()
+
+        while (not sorted_s.is_empty()) and (sorted_s.peek() > temp):
+            stack.push(sorted_s.pop())
+
+        sorted_s.push(temp)
+
+    while not sorted_s.is_empty():
+        stack.push(sorted_s.pop())
+
+
+if __name__ == "__main__":
+    print(is_balanced_parentheses("()()()"))
+
+
