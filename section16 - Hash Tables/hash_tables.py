@@ -92,3 +92,35 @@ def group_anagrams(items: list):
         if result not in results:
             results.append(result)
     return results
+
+
+def two_sum(nums: list, target: int) -> list:
+    ht = {}
+
+    for index, value in enumerate(nums):
+        completion = target - value
+        if completion in ht:
+            return [ht[completion], index]
+
+        ht[value] = index
+    return []
+
+
+def subarray_sum(nums: list, target: int) -> list:
+    ht = {0: -1}
+
+    current_sum = 0
+    for index, value in enumerate(nums):
+        current_sum += value
+        ht[current_sum] = index
+
+        completion = current_sum - target
+        if completion in ht:
+            return [ht[completion], index]
+
+    return []
+
+
+
+if __name__ == '__main__':
+    print(subarray_sum([1, 2, 3, 4, 5], 9))
