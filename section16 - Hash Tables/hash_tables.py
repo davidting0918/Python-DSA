@@ -51,3 +51,28 @@ def item_in_common(l1: list, l2: list):
         if i in my_dict:
             return True
     return False
+
+
+def find_duplicates(l: list):
+    results = []
+    ht = {}
+    for i in l:
+        if i not in ht:
+            ht[i] = True
+        else:
+            results.append(i)
+    return results
+
+
+def first_non_repeating_char(string: str):
+    if not string:
+        return None
+    ht = {}
+
+    for l in string:
+        ht[l] = ht.get(l, 0) + 1
+
+    for l in ht:
+        if ht[l] == 1:
+            return l
+    return None
