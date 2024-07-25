@@ -76,3 +76,19 @@ def first_non_repeating_char(string: str):
         if ht[l] == 1:
             return l
     return None
+
+
+def group_anagrams(items: list):
+    # test case: ['eat', 'tea', 'tan', 'ate', 'nat', 'bat']
+    ht = {}
+    for item in items:
+        ht[item] = {}
+        for letter in item:
+            ht[item][letter] = ht.get(letter, 0) + 1
+
+    results = []
+    for sub_value in ht.values():
+        result = [k for k, value in ht.items() if value == sub_value]
+        if result not in results:
+            results.append(result)
+    return results
