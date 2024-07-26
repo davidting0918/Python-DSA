@@ -121,6 +121,44 @@ def subarray_sum(nums: list, target: int) -> list:
     return []
 
 
+def remove_duplicates(l: list):
+    return list(set(l))
+
+
+def has_unique_chars(string: str):
+    unique = set([i for i in string])
+
+    return len(unique) == len(string)
+
+
+def find_pairs(arr1: list, arr2: list, target: int):
+    result = []
+    for num1 in arr1:
+        completion = target - num1
+        if completion in arr2:
+            result.append((num1, completion))
+
+    return result
+
+def longest_consecutive_sequence(nums: list) -> int:
+    nums_set = set(nums)
+
+    length = 0
+
+    for i in nums_set:
+        temp_length = 1
+        if i - 1 not in nums_set:
+            while i + 1 in nums_set:
+                temp_length += 1
+                i += 1
+                continue
+
+        if temp_length >= length:
+            length = temp_length
+    return length
+
 
 if __name__ == '__main__':
     print(subarray_sum([1, 2, 3, 4, 5], 9))
+    has_unique_chars("cake")
+    print(longest_consecutive_sequence([100, 4, 200, 1, 3, 2]))
