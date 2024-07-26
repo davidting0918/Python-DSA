@@ -164,6 +164,33 @@ def sort_stack(stack: Stack2):
         stack.push(sorted_s.pop())
 
 
+# exercise 46 & 47
+class MyQueue:
+    def __init__(self):
+        self.stack1 = []
+        self.stack2 = []
+
+    def enqueue(self, value):
+        while not self.is_empty():
+            self.stack2.append(self.stack1.pop())
+
+        self.stack1.append(value)
+
+        while self.stack2:
+            self.stack1.append(self.stack2.pop())
+
+    def dequeue(self):
+        if not self.is_empty():
+            return self.stack1.pop()
+        return None
+
+    def peek(self):
+        return self.stack1[-1]
+
+    def is_empty(self):
+        return len(self.stack1) == 0
+
+
 if __name__ == "__main__":
     print(is_balanced_parentheses("()()()"))
 
