@@ -10,6 +10,20 @@ class rBST:  # in each node, n.left is smaller than n.value and n.right is bigge
         self.root = None
         self.height = 0
 
+    def visualize(self):
+        if not self.root:
+            print("Tree is empty")
+        else:
+            print("--------")
+            self._visualize(self.root, 0)
+            print("--------")
+
+    def _visualize(self, node, level):
+        if node is not None:
+            self._visualize(node.right, level + 1)
+            print(' ' * 4 * level + '->', node.value)
+            self._visualize(node.left, level + 1)
+
     def __r_contains(self, c_node: Node, value: int):
         if not c_node:
             return False
@@ -76,3 +90,35 @@ class rBST:  # in each node, n.left is smaller than n.value and n.right is bigge
         while c_node.left:
             c_node = c_node.left
         return c_node.value
+
+    def sorted_list_to_bst(self, nums):
+        self.root = self.__sorted_list_to_bst(nums, 0, len(nums) - 1)
+
+    def __sorted_list_to_bst(self, nums, left, right):
+        if left > right:
+            return None
+
+        middle_index = (left + right) // 2
+        node = Node(nums[middle_index])
+
+        node.left = self.__sorted_list_to_bst(nums, left, middle_index - 1)
+        node.right = self.__sorted_list_to_bst(nums, middle_index + 1, right)
+        return node
+
+    def invert(self):
+        self.root = self.__invert_tree(self.root)
+
+    def __invert_tree(self, node: Node):
+        if not node:
+            return None
+        temp = node.left
+        node.left = node.right
+        node.right = temp
+
+        if node.left:
+            node.left = self.__invert_tree(node.left)
+
+        if node.right:
+            node.right = self.__invert_tree(node.right)
+
+        return node
