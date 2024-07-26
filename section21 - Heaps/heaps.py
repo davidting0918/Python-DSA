@@ -3,8 +3,12 @@
 class Heap:
     def __init__(self):
         self.heap = []
+
+    def print(self):
+        print(self.heap)
+
     def _left_child(self, index: int):
-        return 2 + index + 1
+        return (2 * index) + 1
 
     def _right_child(self, index: int) -> int:
         return 2 * (index + 1)
@@ -132,3 +136,23 @@ class MinHeap(Heap):
 
             self._sink_down(0)
             return remove
+
+
+def find_kth_smallest(nums: list, k: int) -> int:
+    heap = MaxHeap()
+    for num in nums:
+        heap.insert(num)
+
+    while len(heap.heap) > k:
+        heap.remove()
+
+    return heap.heap[0]
+
+def stream_max(nums: list):
+    heap = MaxHeap()
+    results = []
+    for num in nums:
+        heap.insert(num)
+        results.append(heap.heap[0])
+
+    return results
