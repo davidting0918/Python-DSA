@@ -24,3 +24,47 @@ def fib_bottom_up(n: int):
         next_fib = num_list[index - 1] + num_list[index - 2]
         num_list.append(next_fib)
     return num_list[n]
+
+
+def remove_element(nums: list, value: int):
+    i = 0
+    while i < len(nums):
+        if nums[i] == value:
+            nums.pop(i)
+        else:
+            i += 1
+    return len(nums)
+    
+
+def find_max_min(nums: list):
+    minimum = nums[0]
+    maximum = nums[0]
+    
+    for num in nums:
+        if num > maximum:
+            maximum = num
+        elif num < minimum:
+            minimum = num
+    
+    return (maximum, minimum)
+
+
+def find_longest_string(strings: list):
+    longest = ""
+    
+    for string in strings:
+        if len(string) > len(longest):
+            longest = string
+    
+    return longest
+    
+
+def remove_duplicates(nums: list):
+    index = 0
+    while index < len(nums):
+        if nums[index] in nums[:index]:
+            nums.pop(index)
+    
+        else:
+            index += 1
+    return len(nums)
