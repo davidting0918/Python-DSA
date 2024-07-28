@@ -68,3 +68,29 @@ def remove_duplicates(nums: list):
         else:
             index += 1
     return len(nums)
+
+
+def max_profit(prices: list):
+    mp = 0
+    for i in range(len(prices) - 1):
+        p = [prices[j] - prices[i] for j in range(i + 1, len(prices))]
+        mp = max(mp, max(p))
+    return mp
+    
+    
+def rotate(nums: list, k: int):
+    for i in range(k):
+        nums.insert(0, nums.pop())
+    return nums
+
+
+def max_subarray(nums: list):
+    if not nums:
+        return 0
+    maximum = float("-inf")
+    
+    for index in range(len(nums)):
+        for sub_index in range(index + 1, len(nums) + 1):
+            maximum = max(maximum, sum(nums[index:sub_index]))
+    
+    return maximum
